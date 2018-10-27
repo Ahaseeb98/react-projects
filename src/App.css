@@ -30,3 +30,94 @@
     transform: rotate(360deg);
   }
 }
+.map {
+  margin: 10px auto;
+  width: 80%;
+  height: 70%;
+}
+
+.log {
+  background-color: aquamarine;
+  display: inline-block;
+  margin: 15px auto;
+  padding: 10% 15%;
+  height: 50vh!important;
+}
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	/* position: absolute; */
+	z-index: -1;
+}
+.inputfile + label {
+  font-size: 1.25em;
+  font-weight: 700;
+  color: white;
+  background-color: black;
+  display: inline-block;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+  background-color: red;
+}
+.inputfile + label {
+	cursor: pointer; /* "hand" cursor */
+}
+.check {
+  width: 100%;
+  display: inline-block;
+  background: #61dafb;
+}
+
+.cont {
+  display: block;
+  width: 60%;
+  margin: 10% auto;
+  background: #61dafb;
+  padding: 80px 40px;
+}
+.stack {
+  background: pink;
+  width: 10%;
+  margin: 0px 35%;
+  /* position: absolute; */
+}
+
+.search {
+  position: 'relative';
+  /* border-radius: theme.shape.borderRadius; */
+  background-color: 'white' ;
+  /* '&:hover': {
+    backgroundColor: fade(theme.palette.common.white, 0.25),
+  }, */
+  /* marginLeft: 0, */
+  width: '100%';
+}
+searchIcon {
+  /* width: theme.spacing.unit * 9, */
+  height: '100%';
+  position: 'absolute';
+  pointer-events: 'none';
+  display: 'flex';
+  align-items: 'center';
+  justify-content: 'center';
+}
+inputRoot {
+  color: 'inherit';
+  width: '100%'
+}
+/* inputInput: {
+  paddingTop: theme.spacing.unit,
+  paddingRight: theme.spacing.unit,
+  paddingBottom: theme.spacing.unit,
+  paddingLeft: theme.spacing.unit * 10,
+  transition: theme.transitions.create('width'),
+  width: '100%',
+  [theme.breakpoints.up('sm')]: {
+    width: 120,
+    '&:focus': {
+      width: 200,
+    }, */
