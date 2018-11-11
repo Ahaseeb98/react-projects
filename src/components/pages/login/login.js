@@ -16,14 +16,14 @@ class App extends Component {
     this.login = this.login.bind(this);
   }
 
-  
+
   login() {
     firebase.auth().signInWithPopup(provider).then(result => {
       var user = result.user;
       // console.log(user)
-      this.setState({x: user.displayName})
-    }).catch(function(error) {
-      console.log("Error",error)
+      this.setState({ x: user.displayName })
+    }).catch(function (error) {
+      console.log("Error", error)
     });
   }
   componentWillMount() {
@@ -33,30 +33,37 @@ class App extends Component {
   authListener() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        this.props.history.replace('/profile')
-        // this.props.history.replace(`/dashboard${user.uid}`)
+        console.log(user);
+        firebase.database().ref('/users/' + user.uid).on('value', e => {
+          if (e.val() === null) {
+            this.props.history.replace('/profile')
+          }
+          else {
+            this.props.history.replace(`/dashboard${user.uid}`);
+          }
+        })
       }
     });
   }
-  
+
   render() {
     console.log(this.state.x)
-    return(
-      <div className="App" style={{background: `url(${img}) no-repeat center center fixed`,backgroundSize: 'cover', height: '100vh', width: "100%"}} >
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <Typography component="h1" variant="h2" gutterBottom style={{fontWeight: '400', color: 'white',textShadow: 'black 1px 2px 1px'}}>
-        Login or Signup with facebook.
+    return (
+      <div className="App" style={{ background: `url(${img}) no-repeat center center fixed`, backgroundSize: 'cover', height: '100vh', width: "100%" }} >
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <Typography component="h1" variant="h2" gutterBottom style={{ fontWeight: '400', color: 'white', textShadow: 'black 1px 2px 1px' }}>
+          Login or Signup with facebook.
       </Typography>
-      <Button onClick={this.login} variant="contained" color="primary" >Login with facebook!</Button>
+        <Button onClick={this.login} variant="contained" color="primary" >Login with facebook!</Button>
       </div>
-   )
- }
+    )
+  }
 
 }
 

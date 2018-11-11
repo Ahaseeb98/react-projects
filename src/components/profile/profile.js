@@ -80,9 +80,9 @@ class App extends Component {
     let statusCopy = Object.assign({}, this.state);
     statusCopy.obj['location'] = location;
     this.setState(statusCopy);
-    firebase.database().ref(`/user/`).push(this.state.obj)
+    firebase.database().ref(`/users/${this.state.obj.uid}`).update(this.state.obj)
     // this.setState({next: 1 + this.state.next})
-        this.props.history.replace(`/dashboard${this.state.obj.uid}`)
+        this.props.history.push(`/dashboard:${this.state.obj.uid}`)
 
   }
   

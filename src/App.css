@@ -80,7 +80,7 @@
   padding: 80px 40px;
 }
 .stack {
-  background: pink;
+  /* background: pink; */
   width: 10%;
   margin: 0px 35%;
   /* position: absolute; */
@@ -109,6 +109,14 @@ inputRoot {
   color: 'inherit';
   width: '100%'
 }
+.box {
+  background: #61dafb;
+  padding: 10px 20px;
+  margin: 10px 10%;
+}
+.nav{
+  display: none!important;
+}
 /* inputInput: {
   paddingTop: theme.spacing.unit,
   paddingRight: theme.spacing.unit,
@@ -121,3 +129,8 @@ inputRoot {
     '&:focus': {
       width: 200,
     }, */
+
+
+    .listBtn {
+      margin: 0px 2px!important;
+    }
