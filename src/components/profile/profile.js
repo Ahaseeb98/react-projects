@@ -100,19 +100,22 @@ class App extends Component {
   }
 
 ProfileNext() {
-  return <div className="log">
+  return <center>
+     <div className="log">
     <Typography component="h1" variant="h4" gutterBottom style={{fontWeight: '400', color: '',textShadow: 'black 1px 2px 1px'}}>
       Profile
     </Typography>
+    <br />
     <TextField label="Nick Name" required name="nickName" onChange={(e) => this.handleChange('nickName', e)}/>
       <br />
       <br />
     <TextField label="Number" required name="number" onChange={(e) => this.handleChange('number', e)}/>
       <br />
       <br />
-    <Button variant="contained" onClick={() => this.next()} style={{float: 'right', backgroundColor: 'orange'}}>Next</Button>
+    <Button variant="contained" onClick={() => this.next()} style={{backgroundColor: 'orange'}}>Next</Button>
 
   </div>
+  </center>
 } 
 
   ProfileFinish() {

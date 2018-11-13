@@ -10,9 +10,7 @@ class NavBar extends Component {
     this.state = {
           counter: 0,
           anchorEl: null,
-
         }
-        
     }
     handleMenu = event => {
       this.setState({ anchorEl: event.currentTarget });

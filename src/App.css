@@ -37,11 +37,21 @@
 }
 
 .log {
-  background-color: aquamarine;
-  display: inline-block;
-  margin: 15px auto;
-  padding: 10% 15%;
+  max-width: 500px!important;
+  min-width: 200px!important;
+  background-color: rgb(247, 244, 217);
+  display: block;
+  border-radius: 25px;
+  margin: 25px 20px;
+  /* margin: 0px auto; */
+  padding: 30px 30px!important ;
   height: 50vh!important;
+  /* text-align: center!important; */
+}
+.log Button {
+  background-color: 'orange';
+  display: block!important;
+  /* float: right; */
 }
 .inputfile {
 	width: 0.1px;
@@ -69,15 +79,16 @@
 .check {
   width: 100%;
   display: inline-block;
-  background: #61dafb;
+  /* background: #61dafb; */
 }
 
 .cont {
-  display: block;
-  width: 60%;
-  margin: 10% auto;
-  background: #61dafb;
-  padding: 80px 40px;
+  display: inline-block;
+  max-width: 600px!important;
+  min-width: 200px!important;
+  margin: 10% 10px;
+  background-color: rgb(247, 244, 217);
+  padding: 80px 20px;
 }
 .stack {
   /* background: pink; */

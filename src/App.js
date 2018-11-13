@@ -27,7 +27,7 @@ class App extends Component {
           <Router>
             <div>
               <Route exact path="/" component={Login} />
-              <Route path="/location/:location/:userId" component={Loc} />
+              <Route path="/location/:location/:requestedUser" component={Loc} />
               <Route exact path="/profile" component={Profile} />
               <Route exact path="/profile/images" component={ImageUpload} />
               <Route exact path="/dashboard:userId" component={Dashboard} />

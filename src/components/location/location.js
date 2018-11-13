@@ -16,8 +16,10 @@ class Location extends Component {
       arr: null,
       search: null,
       seacrhArr: null,
+      // userId: null,
       obj: {
-        userId: this.props.match.params.userId,
+        requestReciever: this.props.match.params.requestedUser,
+        requestSender: null,
         vanue: null
       },
       mapToggle: false,
@@ -39,6 +41,13 @@ class Location extends Component {
 
   componentDidMount() {
     this.getVanues();
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        let statusCopy = Object.assign({}, this.state);
+        statusCopy.obj['requestSender'] = user.uid;
+        this.setState(statusCopy);
+      }
+    });
   }
 
   x(e) {
@@ -52,9 +61,9 @@ class Location extends Component {
     statusCopy.obj['time'] = e;
     statusCopy.obj['date'] = f;
     this.setState(statusCopy);
-    firebase.database().ref(`meetings/${this.props.match.params.userId}/`).push(this.state.obj)
+    firebase.database().ref(`meetings/`).push(this.state.obj)
     alert('successfully Set up meeting')
-    this.props.history.replace(`/dashboard:${this.props.match.params.userId}`)
+    this.props.history.replace(`/dashboard:${this.state.obj.requestSender}`)
   }
 
   getVanues = (query) => {
@@ -139,7 +148,7 @@ class Location extends Component {
               <SnackbarContent
                 message={v.name}
                 value={v.name}
-                style={{ margin: '5px auto' }}
+                style={{ margin: '5px auto', backgroundColor: 'rgb(247, 244, 217)' }}
                 action={<div>
                   <Button className="listBtn" variant="contained" color="default" size="small" onClick={() => this.next(v.name)}>
                   Select venue

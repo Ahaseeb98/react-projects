@@ -36,7 +36,8 @@ class App extends Component {
   };
 
   beverages() {
-    return <FormControl component="fieldset">
+    return <FormControl component="fieldset" className="log">
+    <center>
       <Typography component="h1" variant="h4">
         Select Your Beverages
       </Typography>
@@ -65,11 +66,14 @@ class App extends Component {
         />
       </FormGroup>
       <Button variant="contained" onClick={() => this.setState({ flag: true })}>Next</Button>
+      </center>
+
     </FormControl>
   }
 
   time() {
-    return <FormControl component="fieldset">
+    return <FormControl component="fieldset" className="log">
+    <center>
       <Typography component="h1" variant="h4">
         Select Meeting Time
       </Typography>
@@ -97,7 +101,10 @@ class App extends Component {
           label="100 min"
         />
       </FormGroup>
+      <br />
+      <br />
       <Button variant="contained" onClick={() => this.handleChange()}>Next</Button>
+      </center>
     </FormControl>
   }
   render() {

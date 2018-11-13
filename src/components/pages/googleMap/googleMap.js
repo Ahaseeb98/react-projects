@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
+import Button from '@material-ui/core/Button'
 
 class googleMap extends Component {
   constructor() {
@@ -55,7 +56,7 @@ class googleMap extends Component {
           updateCoords={this.updateCoords}
         />}
         <br />
-        <button variant="contained" onClick={() => this.x()} style={{ backgroundColor: 'orange' }}>Submit</button>
+        <Button variant="contained" onClick={() => this.x()} style={{ backgroundColor: 'orange' }}>Submit</Button>
 
       </div>
     )
