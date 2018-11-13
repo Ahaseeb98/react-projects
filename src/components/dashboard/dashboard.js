@@ -11,7 +11,8 @@ class Dashboard extends Component {
     super()
     this.state = {
       setMeeting: null,
-      meetingFlag: null
+      meetingFlag: null,
+      userId: null
     };
     this.setLocation = this.setLocation.bind(this)
     this.setMeeting = this.setMeeting.bind(this)
@@ -22,6 +23,16 @@ class Dashboard extends Component {
        e.val() === null ? this.setState({setMeeting: true}) : this.setState({setMeeting: false})
       //  console.log('loading Ends')
     })
+    this.authListener()
+  }
+
+  authListener() {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        console.log(user);
+        this.setState({userId: user.uid})
+      }
+    });
   }
 
   setLocation(e) {
@@ -35,7 +46,7 @@ class Dashboard extends Component {
 
 
   render() {
-    const {setMeeting, meetingFlag} = this.state;
+    const {setMeeting, meetingFlag, userId} = this.state;
     return (
       <div className="App">
       {
@@ -45,7 +56,7 @@ class Dashboard extends Component {
         setMeeting
          ? <SetMeeting setLocation={this.setLocation} x={meetingFlag}/>
          : 
-        <MeetingPlan setMeeting={this.setMeeting} userId={this.props.match.params.userId}/>
+        <MeetingPlan setMeeting={this.setMeeting} userId={userId}/>
       }
       </div>
     )

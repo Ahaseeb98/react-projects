@@ -22,6 +22,11 @@ class App extends Component {
       var user = result.user;
       // console.log(user)
       this.setState({ x: user.displayName })
+
+// user.updateProfile({
+//   photoURL: `${photoURL}?type=large`
+// })
+
     }).catch(function (error) {
       console.log("Error", error)
     });

@@ -58,8 +58,8 @@ class Location extends Component {
   submit(e, f) {
     console.log(e,f)
     let statusCopy = Object.assign({}, this.state);
-    statusCopy.obj['time'] = e;
-    statusCopy.obj['date'] = f;
+    statusCopy.obj['Meetingtime'] = e;
+    statusCopy.obj['Meetingdate'] = f;
     this.setState(statusCopy);
     firebase.database().ref(`meetings/`).push(this.state.obj)
     alert('successfully Set up meeting')
@@ -78,6 +78,7 @@ class Location extends Component {
       limit: 3,
       v: "20182510"
     }
+    console.log(endPoint + new URLSearchParams(params))
     axios.get(endPoint + new URLSearchParams(params)).then(res => {
       this.setState({ arr: res.data.response.groups[0].items })
     }).catch(error => {
@@ -107,9 +108,9 @@ class Location extends Component {
   }
 
 
-  next(e) {
+  next(e, i) {
     let statusCopy = Object.assign({}, this.state);
-    statusCopy.obj['vanue'] = e;
+    statusCopy.obj['vanue'] = {e, ...i};
     this.setState(statusCopy);
     this.setState({l: e, search: null, arr: null})
   }
@@ -129,7 +130,7 @@ class Location extends Component {
                 value={v.venue.name}
                 style={{ margin: '5px auto' }}
                 action={<div>
-                  <Button className="listBtn" variant="contained" color="default" size="small" onClick={() => this.next(v.venue.name)}>
+                  <Button className="listBtn" variant="contained" color="default" size="small" onClick={() => this.next(v.venue.name, v.venue.location.labeledLatLngs[0])}>
                   Select venue
                   </Button>
                   <Button className="listBtn" variant="contained" color="default" size="small" onClick={() => this.getDirections(v.venue.location.labeledLatLngs[0])}>
@@ -143,7 +144,7 @@ class Location extends Component {
         }
         {
           seacrhArr && !mapToggle &&search !== null && seacrhArr.map((v, i) => {
-            console.log(v)
+            // console.log('IMPORTANT',v)
             return <div key={i}>
               <SnackbarContent
                 message={v.name}
@@ -159,7 +160,7 @@ class Location extends Component {
                   </div>
                   }
               />
-            </div>
+            </div> 
           })
         }
         {

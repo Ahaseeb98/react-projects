@@ -21,7 +21,7 @@ class meeting extends Component {
 
   componentDidMount() {
     firebase.database().ref('users').child('/').on('child_added', e => {
-      // console.log(e.val().images)
+      console.log(e.val())
       let x = this.state.arr;
       x.push(e.val())
       this.setState({ arr: x })
@@ -48,6 +48,7 @@ class meeting extends Component {
       infinite: true,
       indicators: true,
     }
+
     return arr && arr.map((v, i) => {
       return i === this.state.i && <Swing
         className="stack"
