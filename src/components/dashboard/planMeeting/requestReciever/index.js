@@ -14,6 +14,7 @@ class meetingPlan extends Component {
     this.state = {
       arr: []
     };
+    this.cancel = this.cancel.bind(this)
   }
 
   componentDidMount() {
@@ -25,12 +26,18 @@ class meetingPlan extends Component {
                 console.log('e', v.val().name)
                 const x = this.state.arr;
                 x.push({
+                    key: e.key,
                     ...v.val(),
                     ...e.val()
                 })
                 this.setState({arr: x})
             })
     })
+  }
+
+  cancel(e) {
+    console.log(e)
+      firebase.database().ref(`meetings/${e}`).update({status: 'Canceled'})
   }
 
   render() {
@@ -54,7 +61,7 @@ class meetingPlan extends Component {
                             </Avatar>
                         }
                         title={v.name}
-                        subheader={!v.status && 'Status : Pending'}
+                        subheader={!v.status ? 'Status : Pending' : ('Status : ' + v.status)}
                         />
                         <Typography variant="button" gutterBottom align="left" style={{marginLeft: '30px'}}>
                             Meeting Date : {v.Meetingdate}
@@ -65,8 +72,8 @@ class meetingPlan extends Component {
                         <Typography variant="button" gutterBottom align="left" style={{marginLeft: '30px'}}>
                             Vanue : {v.vanue.e}
                         </Typography>
-                        <Button variant="outlined" style={{width: '50%'}}>
-                            Comfirm
+                        <Button variant="outlined" style={{width: '50%'}} onClick={() => this.cancel(v.key)}>
+                            Cancel
                         </Button>
                         <Button variant="outlined" style={{width: '50%'}}>
                             Get Direction

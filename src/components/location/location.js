@@ -91,6 +91,7 @@ class Location extends Component {
     const parameters = {
       client_id: "MFLC0HMSQJPI3UQLPYO4DX4GNBYMF2IYFJZAFZMJXN0EGSJQ",
       client_secret: "PLWAT2JO0ASGFH1RYIBDN40UDAPBPWHD3M5QMQVZ45AEPH12",
+      categoryId:"4d4b7105d754a06374d81259",
       query: this.state.search,
       ll: this.props.match.params.location,
       radius: 5000,
@@ -149,7 +150,7 @@ class Location extends Component {
               <SnackbarContent
                 message={v.name}
                 value={v.name}
-                style={{ margin: '5px auto', backgroundColor: 'rgb(247, 244, 217)' }}
+                style={{ margin: '5px auto', backgroundColor: 'rgb(247, 244, 217) ',color: 'black' }}
                 action={<div>
                   <Button className="listBtn" variant="contained" color="default" size="small" onClick={() => this.next(v.name)}>
                   Select venue
