@@ -61,7 +61,7 @@ class meeting extends Component {
         throwoutright={() => this.props.setLocation(`/location/${v.location.lat + "," + v.location.lng}/${v.uid}`)}
 
       >
-
+      
         <div key={i}>
           <Card style={{ width: '400px', margin: '10px auto', padding: '1px auto', textAlign: 'center' }}>
             

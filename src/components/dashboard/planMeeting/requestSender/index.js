@@ -7,13 +7,15 @@ import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
+import Popup from '../popup/popup'
 
 class meetingPlan extends Component {
   constructor() {
     super()
     this.state = {
-      arr: null
+      arr: []
     };
+    
   }
 
   componentDidMount() {
@@ -43,41 +45,42 @@ class meetingPlan extends Component {
       <div className="App">
       {
          arr && arr.map((v, i) => {
-             return <div key={i}>
-                 <Card 
-                 style={{width: '400px', margin: '10px auto'}}
-                 >
-                       <CardHeader 
-                       style={{textAlign: 'left'}}
-                       avatar={
-                           <Avatar aria-label="Recipe" 
-                           >
-                           <img src={v.photoUrl}/>
+              return <div key={i}>             
+              <Card 
+              style={{width: '400px', margin: '10px auto'}}
+              >
+                    <CardHeader 
+                    style={{textAlign: 'left'}}
+                    avatar={
+                        <Avatar aria-label="Recipe" 
+                        >
+                        <img src={v.photoUrl}/>
 
-                           </Avatar>
-                       }
-                       title={v.name}
-                       subheader={!v.status && 'Status : Pending'}
-                       />
-                       <Typography variant="button" gutterBottom align="left" style={{marginLeft: '30px'}}>
-                           Meeting Date : {v.Meetingdate}
-                       </Typography>
-                       <Typography variant="button" gutterBottom align="left" style={{marginLeft: '30px'}}>
-                           Meeting Time : {v.Meetingtime + ' PM'}
-                       </Typography>
-                       <Typography variant="button" gutterBottom align="left" style={{marginLeft: '30px'}}>
-                           Vanue : {v.vanue.e}
-                       </Typography>
-                       <Button variant="outlined" style={{width: '50%'}} onClick={() => this.confirm(v.key)}>
-                           Comfirm
-                       </Button>
-                       <Button variant="outlined" style={{width: '50%'}}>
-                           Get Direction
-                       </Button>
-                   </Card>
-           </div>
+                        </Avatar>
+                    }
+                    title={v.name}
+                    subheader={!v.status ? 'Status : Pending' : ('Status : ' + v.status)}
+                    />
+                    <Typography variant="button" gutterBottom align="left" style={{marginLeft: '30px'}}>
+                        Meeting Date : {v.Meetingdate}
+                    </Typography>
+                    <Typography variant="button" gutterBottom align="left" style={{marginLeft: '30px'}}>
+                        Meeting Time : {v.Meetingtime + ' PM'}
+                    </Typography>
+                    <Typography variant="button" gutterBottom align="left" style={{marginLeft: '30px'}}>
+                        Vanue : {v.vanue.e}
+                    </Typography>
+                    <Button variant="outlined" style={{width: '45%', margin: '5px'}} onClick={() => this.comfirm(v.key)}>
+                        Comfirm
+                    </Button>
+                    <Button variant="outlined" style={{width: '45%', margin: '5px'}}>
+                        Get Direction
+                    </Button>
+                </Card>
+            </div>
          })
      }
+
       </div>
     )
   }

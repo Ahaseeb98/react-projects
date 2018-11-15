@@ -48,13 +48,17 @@ class App extends Component {
         statusCopy.obj['uid'] = user.uid;
         this.setState(statusCopy);
         console.log(this.state.obj)
+        firebase.database().ref(`/users/${this.state.obj.uid}`).update({name: user.displayName, photoUrl: user.photoURL, uid: user.uid})
+
       }
     });
   }
   next() {
     const {obj, next} = this.state;
+    firebase.database().ref(`/users/${this.state.obj.uid}`).update({nickName: obj.nickName, number: obj.number})
     if(obj.nickName && obj.number){
     this.setState({next: 1 + next})
+    
   }
     else{
       alert("Error Des")
@@ -69,6 +73,7 @@ class App extends Component {
       statusCopy.obj['time'] = b;
       this.setState(statusCopy);
       this.setState({next: 1 + this.state.next})
+      firebase.database().ref(`/users/${this.state.obj.uid}`).update({beverages: a, time: b, uid: this.state.obj.uid})
     }
       else{
         alert("Error Des")
@@ -80,8 +85,8 @@ class App extends Component {
     let statusCopy = Object.assign({}, this.state);
     statusCopy.obj['location'] = location;
     this.setState(statusCopy);
-    firebase.database().ref(`/users/${this.state.obj.uid}`).update(this.state.obj)
-    // this.setState({next: 1 + this.state.next})
+    firebase.database().ref(`/users/${this.state.obj.uid}`).update({location: location})
+    // this.setState({next: 1 + this.state.next}
         this.props.history.push(`/dashboard:${this.state.obj.uid}`)
 
   }
@@ -96,6 +101,7 @@ class App extends Component {
     let statusCopy = Object.assign({}, this.state);
     statusCopy.obj['images'] = image;
     this.setState(statusCopy);
+    firebase.database().ref(`/users/${this.state.obj.uid}`).update({images: image})
     this.setState({next: 1 + this.state.next})
   }
 
@@ -119,7 +125,7 @@ ProfileNext() {
 } 
 
   ProfileFinish() {
-  return <ImageUpload profileImages={this.profileImages}/>
+  return <ImageUpload profileImages={this.profileImages} userId={this.state.obj.uid}/>
 } 
 
   render() {

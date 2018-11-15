@@ -7,18 +7,18 @@ import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
-
+import Popup from '../popup/popup'
 class meetingPlan extends Component {
   constructor() {
     super()
     this.state = {
       arr: []
     };
-    this.cancel = this.cancel.bind(this)
+    // this.cancel = this.cancel.bind(this)
   }
 
   componentDidMount() {
-    console.log(this.props.userId)
+    // console.log(this.props.userId)
 
     firebase.database().ref('meetings/').on('child_added', e => {
         (e.val().requestSender) === this.props.userId &&
@@ -39,7 +39,7 @@ class meetingPlan extends Component {
     console.log(e)
       firebase.database().ref(`meetings/${e}`).update({status: 'Canceled'})
   }
-
+ 
   render() {
     const {arr} = this.state;
       console.log(arr)
@@ -72,16 +72,18 @@ class meetingPlan extends Component {
                         <Typography variant="button" gutterBottom align="left" style={{marginLeft: '30px'}}>
                             Vanue : {v.vanue.e}
                         </Typography>
-                        <Button variant="outlined" style={{width: '50%'}} onClick={() => this.cancel(v.key)}>
+                        <Button variant="outlined" style={{width: '45%', margin: '5px'}} onClick={() => this.cancel(v.key)}>
                             Cancel
                         </Button>
-                        <Button variant="outlined" style={{width: '50%'}}>
+                        <Button variant="outlined" style={{width: '45%', margin: '5px'}}>
                             Get Direction
                         </Button>
                     </Card>
             </div>
           })
       }
+                 <Popup userId={this.props.userId}/>
+
       </div>
     )
   }

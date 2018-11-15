@@ -61,7 +61,7 @@ class Location extends Component {
     statusCopy.obj['Meetingtime'] = e;
     statusCopy.obj['Meetingdate'] = f;
     this.setState(statusCopy);
-    firebase.database().ref(`meetings/`).push(this.state.obj)
+    firebase.database().ref(`meetings/`).update({Meetingtime: e, Meetingdate: f})
     alert('successfully Set up meeting')
     this.props.history.replace(`/dashboard:${this.state.obj.requestSender}`)
   }
@@ -114,6 +114,7 @@ class Location extends Component {
     statusCopy.obj['vanue'] = {e, ...i};
     this.setState(statusCopy);
     this.setState({l: e, search: null, arr: null})
+    firebase.database().ref(`meetings/`).update({vanue: e})
   }
 
 
@@ -152,7 +153,7 @@ class Location extends Component {
                 value={v.name}
                 style={{ margin: '5px auto', backgroundColor: 'rgb(247, 244, 217) ',color: 'black' }}
                 action={<div>
-                  <Button className="listBtn" variant="contained" color="default" size="small" onClick={() => this.next(v.name)}>
+                  <Button className="listBtn" variant="contained" color="default" size="small" onClick={() => this.next(v.name, v.location.labeledLatLngs[0])}>
                   Select venue
                   </Button>
                   <Button className="listBtn" variant="contained" color="default" size="small" onClick={() => this.getDirections(v.location.labeledLatLngs[0])}>

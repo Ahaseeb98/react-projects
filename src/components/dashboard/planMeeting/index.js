@@ -47,6 +47,8 @@ class meetingPlan extends Component {
               </Tabs>
             </Paper>
       <Button onClick={()=> this.props.setMeeting()}>Set a Meeting</Button>
+      <Button onClick={()=> this.props.profile()}>Profile</Button>
+
       {
         value === 0 
           &&

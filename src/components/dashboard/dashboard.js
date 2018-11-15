@@ -7,8 +7,8 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 
 class Dashboard extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       setMeeting: null,
       meetingFlag: null,
@@ -16,6 +16,8 @@ class Dashboard extends Component {
     };
     this.setLocation = this.setLocation.bind(this)
     this.setMeeting = this.setMeeting.bind(this)
+    this.profile = this.profile.bind(this)
+
   }
   componentDidMount() {
     firebase.database().ref('meetings/').on('value', e => {
@@ -44,11 +46,16 @@ class Dashboard extends Component {
 
   }
 
+  profile() {
+    console.log(this.props)
+    this.props.history.push('/profile')
+  }
 
   render() {
     const {setMeeting, meetingFlag, userId} = this.state;
     return (
       <div className="App">
+
       {
         setMeeting === null
          ? <CircularProgress  color="secondary" style={{margin: '300px auto'}}/>
@@ -56,7 +63,7 @@ class Dashboard extends Component {
         setMeeting
          ? <SetMeeting setLocation={this.setLocation} x={meetingFlag}/>
          : 
-        <MeetingPlan setMeeting={this.setMeeting} userId={userId}/>
+        <MeetingPlan setMeeting={this.setMeeting} userId={userId} profile={this.profile}/>
       }
       </div>
     )
