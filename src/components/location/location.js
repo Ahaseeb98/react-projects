@@ -61,7 +61,7 @@ class Location extends Component {
     statusCopy.obj['Meetingtime'] = e;
     statusCopy.obj['Meetingdate'] = f;
     this.setState(statusCopy);
-    firebase.database().ref(`meetings/`).update({Meetingtime: e, Meetingdate: f})
+    firebase.database().ref(`meetings/`).push(this.state.obj)
     alert('successfully Set up meeting')
     this.props.history.replace(`/dashboard:${this.state.obj.requestSender}`)
   }
@@ -114,7 +114,7 @@ class Location extends Component {
     statusCopy.obj['vanue'] = {e, ...i};
     this.setState(statusCopy);
     this.setState({l: e, search: null, arr: null})
-    firebase.database().ref(`meetings/`).update({vanue: e})
+    // firebase.database().ref(`meetings/`).update({vanue: e})
   }
 
 

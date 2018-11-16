@@ -20,12 +20,24 @@ class Dashboard extends Component {
 
   }
   componentDidMount() {
-    firebase.database().ref('meetings/').on('value', e => {
-      // console.log(e.val())
-       e.val() === null ? this.setState({setMeeting: true}) : this.setState({setMeeting: false})
-      //  console.log('loading Ends')
-    })
+    console.log('dashBoard#######')
     this.authListener()
+    firebase.database().ref('meetings/').on('value', v => {
+      v.forEach(e => {
+        console.log(e.val())
+       e.val() && (e.val().requestSender || e.val().requestReciever) === this.state.userId ? this.setState({setMeeting: false}) : this.setState({setMeeting: true})
+       e.val() && console.log(e.val().requestSender || e.val().requestReciever === this.state.userId)
+       e.val() && console.log(e.val().requestSender , e.val().requestReciever , this.state.userId)
+       
+    })
+  });  
+      
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    if (nextState.setMeeting == true && this.state.setMeeting == true) {
+      this.componentDidMount();
+    }
   }
 
   authListener() {
@@ -38,6 +50,7 @@ class Dashboard extends Component {
   }
 
   setLocation(e) {
+    this.setState({setMeeting: null})
      this.props.history.push(e)
   }
 
@@ -45,7 +58,7 @@ class Dashboard extends Component {
     this.setState({setMeeting: true, meetingFlag: true})
 
   }
-
+  
   profile() {
     console.log(this.props)
     this.props.history.push('/profile')
@@ -53,6 +66,7 @@ class Dashboard extends Component {
 
   render() {
     const {setMeeting, meetingFlag, userId} = this.state;
+    console.log(setMeeting, "Seet Meeting")
     return (
       <div className="App">
 

@@ -8,18 +8,17 @@ import CardHeader from '@material-ui/core/CardHeader';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Popup from '../popup/popup'
+import AddToCalendar from 'react-add-to-calendar'
+
 class meetingPlan extends Component {
   constructor() {
     super()
     this.state = {
       arr: []
     };
-    // this.cancel = this.cancel.bind(this)
   }
 
   componentDidMount() {
-    // console.log(this.props.userId)
-
     firebase.database().ref('meetings/').on('child_added', e => {
         (e.val().requestSender) === this.props.userId &&
             firebase.database().ref(`users/${e.val().requestReciever}`).on('value', v => {
@@ -47,6 +46,16 @@ class meetingPlan extends Component {
       <div className="App">
        {
           arr && arr.map((v, i) => {
+            let event = {
+                title: `Meeting with ${v.name}`,
+                // description: 'This is the sample event provided as an example only',
+                location: `${v.vanue.e}`,
+                startTime: `${v.Meetingdate}T20:45:00-04:00`,
+                endTime: `${v.Meetingdate}T21:45:00-04:00`
+            }
+             let items = [
+               { google: 'Google' }
+            ]
               return <div key={i}>
                   <Card 
                   style={{width: '400px', margin: '10px auto'}}
@@ -72,9 +81,18 @@ class meetingPlan extends Component {
                         <Typography variant="button" gutterBottom align="left" style={{marginLeft: '30px'}}>
                             Vanue : {v.vanue.e}
                         </Typography>
-                        <Button variant="outlined" style={{width: '45%', margin: '5px'}} onClick={() => this.cancel(v.key)}>
-                            Cancel
-                        </Button>
+                        {
+                             v.status === 'Accepted' ? <Button variant="outlined" style={{width: '50%', margin: '5px'}}>
+                             <AddToCalendar 
+                             style={{color: 'pink!important', border: '1px solid black'}}
+                             event={event}
+                             listItems={items} />
+                             </Button>
+                             :
+                             <Button variant="outlined" style={{width: '45%', margin: '5px'}} onClick={() => this.cancel(v.key)}>
+                                 Cancel
+                             </Button>
+                        }
                         <Button variant="outlined" style={{width: '45%', margin: '5px'}}>
                             Get Direction
                         </Button>

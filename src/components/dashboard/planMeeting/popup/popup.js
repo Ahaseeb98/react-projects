@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import firebase from '../../../config/firebase'
 import swal from 'sweetalert';
-
 class meetingPlan extends Component {
   constructor() {
     super()
@@ -12,7 +11,7 @@ class meetingPlan extends Component {
   }
 
   componentDidMount() {
-    firebase.database().ref('meetings/').on('value', e0 => {
+    firebase.database().ref('meetings/').once('value', e0 => {
 
 
 e0.forEach(e => {
@@ -34,7 +33,7 @@ e0.forEach(e => {
                           dangerMode: true,
                       }) 
                       .then(function(){
-                        // firebase.database().ref(`meetings/${v.key}`).update({seen: true})
+                        firebase.database().ref(`meetings/${x.key}`).update({seen: true})
                        });
 
                   }
@@ -45,9 +44,10 @@ e0.forEach(e => {
   }
   render() {
       const {arr, open} = this.state;
-      console.log(open)
+     
     return (
       <div className="App">
+        
       </div>
     )
   }

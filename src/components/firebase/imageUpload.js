@@ -19,6 +19,17 @@ class ImageUpload extends Component {
     this.handleChange = this.handleChange.bind(this);
       this.handleProps = this.handleProps.bind(this);
   }
+  componentDidMount() {
+    firebase.database().ref('users/'+this.props.userId+'/').on('value', e => {
+      console.log(e.val())
+      let statusCopy = Object.assign({}, this.state);
+            statusCopy.url['url1'] = e.val().images.url1;
+            statusCopy.url['url2'] = e.val().images.url2;
+            statusCopy.url['url3'] = e.val().images.url3;
+            this.setState(statusCopy);
+    })
+  
+  }
   handleChange = e => {
        this.setState({name : e.target.name});
     if (e.target.files[0]) {
@@ -50,7 +61,13 @@ class ImageUpload extends Component {
     }
   }
   handleProps = () => {
-      this.props.profileImages(this.state.url)
+      if(this.state.url.url1 && this.state.url.url2 && this.state.url.url3) {
+        this.props.profileImages(this.state.url)
+            
+      }
+      else {
+        alert('Error')
+      }
   }
   render() {
       console.log(this.state.url)
