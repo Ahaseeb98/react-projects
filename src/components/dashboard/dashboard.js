@@ -20,10 +20,11 @@ class Dashboard extends Component {
 
   }
   componentDidMount() {
-    console.log('dashBoard#######')
     this.authListener()
+
     firebase.database().ref('meetings/').on('value', v => {
       v.forEach(e => {
+
         console.log(e.val())
        e.val() && (e.val().requestSender || e.val().requestReciever) === this.state.userId ? this.setState({setMeeting: false}) : this.setState({setMeeting: true})
        e.val() && console.log(e.val().requestSender || e.val().requestReciever === this.state.userId)
@@ -31,11 +32,12 @@ class Dashboard extends Component {
        
     })
   });  
-      
+  console.log('dashBoard#######')
+
   }
 
   componentWillUpdate(nextProps, nextState) {
-    if (nextState.setMeeting == true && this.state.setMeeting == true) {
+    if (nextState.setMeeting === true && this.state.setMeeting !== true) {
       this.componentDidMount();
     }
   }
