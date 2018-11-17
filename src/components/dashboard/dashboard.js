@@ -22,16 +22,17 @@ class Dashboard extends Component {
   componentDidMount() {
     this.authListener()
 
-    firebase.database().ref('meetings/').on('value', v => {
-      v.forEach(e => {
+    firebase.database().ref('meetings/').on('child_added', e => {
+        // console.log(e.val())
 
-        console.log(e.val())
+      // v.forEach(e => {
+
        (e.val() && (e.val().requestSender || e.val().requestReciever)) === this.state.userId ? this.setState({setMeeting: false}) : this.setState({setMeeting: true})
        e.val() && console.log(e.val().requestSender || e.val().requestReciever === this.state.userId)
        e.val() && console.log(e.val().requestSender , e.val().requestReciever , this.state.userId)
        
     })
-  });  
+  // });  
   console.log('dashBoard#######')
 
   }
