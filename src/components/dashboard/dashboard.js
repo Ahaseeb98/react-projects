@@ -26,7 +26,7 @@ class Dashboard extends Component {
       v.forEach(e => {
 
         console.log(e.val())
-       e.val() && (e.val().requestSender || e.val().requestReciever) === this.state.userId ? this.setState({setMeeting: false}) : this.setState({setMeeting: true})
+       (e.val() && (e.val().requestSender || e.val().requestReciever)) === this.state.userId ? this.setState({setMeeting: false}) : this.setState({setMeeting: true})
        e.val() && console.log(e.val().requestSender || e.val().requestReciever === this.state.userId)
        e.val() && console.log(e.val().requestSender , e.val().requestReciever , this.state.userId)
        
@@ -37,7 +37,7 @@ class Dashboard extends Component {
   }
 
   componentWillUpdate(nextProps, nextState) {
-    if (nextState.setMeeting === true && this.state.setMeeting !== true) {
+    if (nextState.setMeeting === true && this.state.setMeeting === true) {
       this.componentDidMount();
     }
   }
